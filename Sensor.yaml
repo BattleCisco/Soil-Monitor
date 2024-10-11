@@ -19,3 +19,7 @@ sensor:
         else if (x > 100) return 100;
         else return (x);
     accuracy_decimals: 0
+  - platform: uptime
+    name: Uptime
+    id: uptime_sensor
+    update_interval: 1min
