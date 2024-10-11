@@ -1,0 +1,21 @@
+sensor:
+  - platform: adc
+    pin: GPIO34
+    name: Soil Moisture
+    icon: "mdi:water-percent"
+    update_interval: 5s
+    attenuation: auto
+    unit_of_measurement: "%"
+    filters:
+    - median:
+        window_size: 8
+        send_every: 2
+        send_first_at: 1
+    - calibrate_linear:
+        - 1.05 -> 100.00
+        - 2.8 -> 0.00
+    - lambda: |
+        if (x < 0) return 0; 
+        else if (x > 100) return 100;
+        else return (x);
+    accuracy_decimals: 0
