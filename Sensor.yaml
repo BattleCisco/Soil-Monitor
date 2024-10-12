@@ -1,3 +1,13 @@
+globals:
+  - id: initial_empty
+    type: float
+    restore_value: yes
+    initial_value: '${initial_empty_value}'
+  - id: initial_full
+    type: float
+    restore_value: yes
+    initial_value: '${initial_full_value}'
+
 sensor:
   - platform: adc
     pin: GPIO34
@@ -12,16 +22,10 @@ sensor:
         send_every: 2
         send_first_at: 1
     - calibrate_linear:
-        - 1.05 -> 100.00
-        - 2.8 -> 0.00
+        - $initial_full_value -> 100.00
+        - $initial_empty_value -> 0.00
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
         else return (x);
     accuracy_decimals: 0
-
-sensor:
-  - platform: uptime
-    name: Uptime
-    id: uptime_sensor
-    update_interval: 1min
