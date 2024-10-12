@@ -28,4 +28,4 @@ sensor:
         if (x < 0) return 0; 
         else if (x > 100) return 100;
         else return (x);
-    accuracy_decimals: 0
+    accuracy_decimals: 2
