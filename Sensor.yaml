@@ -16,10 +16,10 @@ sensor:
     icon: "mdi:flash"
     update_interval: 5s
     attenuation: auto
-  - platform: template
+  - platform: copy
+    source_id: raw_voltage
     id: adjusted_soil_moisture
     name: Adjusted Soil Moisture
-    lambda: return id(raw_voltage).state
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
     filters:
