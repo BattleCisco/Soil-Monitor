@@ -1,0 +1,46 @@
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: version
+    hide_timestamp: true
+    name: "${friendly_name} ESPHome Version"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: mdi:wifi
+      entity_category: diagnostic
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: mdi:wifi-strength-2
+      entity_category: diagnostic
+
+sensor:
+  - platform: adc
+    id: raw_voltage
+    pin: GPIO34
+    name: "Raw Voltage"
+    icon: "mdi:flash"
+    update_interval: 5s
+    attenuation: auto
+  - platform: copy
+    source_id: raw_voltage
+    name: "Filtered Soil Moisture"
+    unit_of_measurement: "%"
+    icon: "mdi:water-percent"
+    filters:
+    - median:
+        window_size: 8
+        send_every: 2
+        send_first_at: 1
+    - calibrate_linear:
+      - ${initial_full_value} -> 100.00
+      - ${initial_empty_value} -> 0.00
+    - lambda: |
+        if (x < 0) return 0; 
+        else if (x > 100) return 100;
+        else return (x);
+    accuracy_decimals: 2
