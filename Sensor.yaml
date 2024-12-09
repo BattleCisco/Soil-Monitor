@@ -17,11 +17,10 @@ sensor:
     update_interval: 5s
     attenuation: auto
   - platform: copy
+    id: adjusted_soil_moisture
     source_id: raw_voltage
-    name: Soil Moisture
+    name: Adjusted Soil Moisture
     icon: "mdi:water-percent"
-    update_interval: 5s
-    attenuation: auto
     unit_of_measurement: "%"
     filters:
     - median:
@@ -29,8 +28,8 @@ sensor:
         send_every: 2
         send_first_at: 1
     - calibrate_linear:
-        - $initial_full_value -> 100.00
-        - $initial_empty_value -> 0.00
+      - $initial_full_value -> 100.00
+      - $initial_empty_value -> 0.00
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
