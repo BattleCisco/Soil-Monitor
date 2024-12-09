@@ -36,5 +36,5 @@ sensor:
     accuracy_decimals: 2
   - platform: template
     name: "Template Sensor"
-    lambda: id(raw_voltage).state
+    lambda: return id(raw_voltage).state
     update_interval: 5s
