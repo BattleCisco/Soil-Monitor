@@ -1,13 +1,3 @@
-globals:
-  - id: initial_empty
-    type: float
-    restore_value: yes
-    initial_value: '${initial_empty_value}'
-  - id: initial_full
-    type: float
-    restore_value: yes
-    initial_value: '${initial_full_value}'
-    
 sensor:
   - platform: adc
     id: raw_voltage
@@ -27,8 +17,8 @@ sensor:
         send_every: 2
         send_first_at: 1
     - calibrate_linear:
-      - $initial_full_value -> 100.00
-      - $initial_empty_value -> 0.00
+      - ${initial_full_value} -> 100.00
+      - ${initial_empty_value} -> 0.00
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
