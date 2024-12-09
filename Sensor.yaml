@@ -18,7 +18,6 @@ sensor:
     attenuation: auto
   - platform: copy
     source_id: raw_voltage
-    id: adjusted_soil_moisture
     name: Adjusted Soil Moisture
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
