@@ -7,48 +7,17 @@ globals:
     type: float
     restore_value: yes
     initial_value: '${initial_full_value}'
-
+    
 sensor:
   - platform: adc
     id: raw_voltage
     pin: GPIO34
     name: Raw Voltage
+    icon: "mdi:lighting"
     update_interval: 5s
     attenuation: auto
-  - platform: combination
-    id: raw_percentage
-    name: Raw Percentage
-    type: linear
-    name: ""
-    sources:
-      - source: raw_voltage
-    filters:
-    - calibrate_linear:
-        - 0.0 -> 100.00
-        - 5.0 -> 0.00
-  - platform: combination
-    id: filtered_percentage
-    name: Filtered Percentage
-    type: linear
-    name: ""
-    sources:
-      - source: raw_voltage
-    filters:
-    - median:
-        window_size: 8
-        send_every: 2
-        send_first_at: 1
-    - calibrate_linear:
-        - $initial_full_value -> 100.00
-        - $initial_empty_value -> 0.00
-    - lambda: |
-        if (x < 0) return 0; 
-        else if (x > 100) return 100;
-        else return (x);
-    accuracy_decimals: 2
-    
-sensor:
   - platform: adc
+    id: filtered_percentage
     pin: GPIO34
     name: Soil Moisture
     icon: "mdi:water-percent"
