@@ -13,12 +13,11 @@ sensor:
     id: raw_voltage
     pin: GPIO34
     name: Raw Voltage
-    icon: "mdi:lighting"
+    icon: "mdi:flash"
     update_interval: 5s
     attenuation: auto
-  - platform: adc
-    id: filtered_percentage
-    pin: GPIO34
+  - platform: copy
+    source_id: raw_voltage
     name: Soil Moisture
     icon: "mdi:water-percent"
     update_interval: 5s
