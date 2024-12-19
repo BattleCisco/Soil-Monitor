@@ -74,7 +74,7 @@ sensor:
   
   - platform: copy
     id: tuned_soil_moisture_uncapped
-    source_id: raw_voltage
+    source_id: averaged_voltage
     name: "Tuned Soil Moisture Uncapped"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
