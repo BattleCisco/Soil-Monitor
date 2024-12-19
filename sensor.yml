@@ -62,6 +62,7 @@ sensor:
     name: "Raw Soil Moisture"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
+    filters:
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
