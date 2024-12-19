@@ -16,7 +16,6 @@ text_sensor:
     hide_timestamp: true
     name: "ESPHome Version"
     entity_category: diagnostic
-  
   - platform: wifi_info
     ip_address:
       name: "IP Address"
@@ -35,7 +34,6 @@ sensor:
     icon: "mdi:flash"
     update_interval: 30s
     attenuation: auto
-  
   - platform: copy
     id: averaged_voltage
     source_id: raw_voltage
@@ -47,7 +45,6 @@ sensor:
           window_size: 30
           send_every: 30
           send_first_at: 1
-
   - platform: copy
     id: raw_soil_moisture_uncapped
     source_id: raw_voltage
@@ -59,7 +56,6 @@ sensor:
       - ${raw_full_value} -> 100.00
       - ${raw_empty_value} -> 0.00
     accuracy_decimals: 2
-
   - platform: copy
     id: raw_soil_moisture
     source_id: raw_soil_moisture_uncapped
@@ -71,7 +67,6 @@ sensor:
         else if (x > 100) return 100;
         else return (x);
     accuracy_decimals: 2
-  
   - platform: copy
     id: tuned_soil_moisture_uncapped
     source_id: averaged_voltage
@@ -87,7 +82,6 @@ sensor:
       - ${tuned_full_value} -> 100.00
       - ${tuned_empty_value} -> 0.00
     accuracy_decimals: 2
-
   - platform: copy
     id: tuned_soil_moisture
     source_id: tuned_soil_moisture_uncapped
