@@ -51,29 +51,30 @@ sensor:
     name: "Raw Soil Moisture Uncapped"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
+    accuracy_decimals: 2
     filters:
     - calibrate_linear:
       - ${raw_full_value} -> 100.00
       - ${raw_empty_value} -> 0.00
-    accuracy_decimals: 2
   - platform: copy
     id: raw_soil_moisture
     source_id: raw_soil_moisture_uncapped
     name: "Raw Soil Moisture"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
+    accuracy_decimals: 2
     filters:
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
         else return (x);
-    accuracy_decimals: 2
   - platform: copy
     id: tuned_soil_moisture_uncapped
     source_id: averaged_voltage
     name: "Tuned Soil Moisture Uncapped"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
+    accuracy_decimals: 2
     filters:
     - median:
         window_size: 8
@@ -82,18 +83,15 @@ sensor:
     - calibrate_linear:
       - ${tuned_full_value} -> 100.00
       - ${tuned_empty_value} -> 0.00
-    accuracy_decimals: 2
   - platform: copy
     id: tuned_soil_moisture
     source_id: tuned_soil_moisture_uncapped
     name: "Tuned Soil Moisture"
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
+    accuracy_decimals: 2
     filters:
     - lambda: |
         if (x < 0) return 0; 
         else if (x > 100) return 100;
         else return (x);
-    accuracy_decimals: 2
-
-  
